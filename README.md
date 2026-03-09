@@ -29,6 +29,7 @@ self-evolution/
   scripts/
     log_learning.py
     quick_validate_skill.py
+    apply_learning_commit.py
 ```
 
 ## Installing into OpenClaw

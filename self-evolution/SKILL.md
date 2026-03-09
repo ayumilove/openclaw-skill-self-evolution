@@ -53,11 +53,20 @@ If it is a repeatable rule: add to `MEMORY.md` or this skill.
 - Run the exact command path that previously failed.
 - If you changed a skill: run the skill validator (see scripts below).
 
-### 6) Commit
+### 6) Verify + commit (autopatch)
 
-If you changed files in a git workspace: commit with a message like:
-- `docs(self-evolution): add rule for <case>`
-- `feat(self-evolution): add learning logger`
+When the fix requires changing files, turn it into a minimal diff and make it durable:
+
+1) Start from a clean tree: `git status --porcelain` should be empty.
+2) Apply the minimal change (skill text / script / config).
+3) Verify by re-running the failing command and/or a validator.
+4) Commit with an intentful message:
+   - `fix(self-evolution): ...`
+   - `docs(self-evolution): ...`
+   - `feat(self-evolution): ...`
+5) Push only after a quick secrets sanity-check.
+
+For detailed guidance, read `references/autopatch.md`.
 
 ## Tools in this skill
 
@@ -65,7 +74,9 @@ If you changed files in a git workspace: commit with a message like:
 
 - `scripts/log_learning.py`: append a JSONL learning record to `memory/self-evolution.jsonl`.
 - `scripts/quick_validate_skill.py`: run OpenClaw's quick validator on this skill folder.
+- `scripts/apply_learning_commit.py`: append a learning record, optionally run a verify command, and (only with explicit flags) create a git commit.
 
 ### references/
 
 - `references/rules.md`: small set of recommended “good learning” patterns.
+- `references/autopatch.md`: safe autopatch protocol for making durable improvements.
