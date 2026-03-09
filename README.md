@@ -68,6 +68,22 @@ python3 self-evolution/scripts/log_learning.py \
 Output file:
 - `memory/self-evolution.jsonl`
 
+## Apply a learning and commit safely (optional)
+
+This helper can log the learning, run an optional verify command, then create a git commit **only from staged changes**.
+
+```bash
+python3 self-evolution/scripts/apply_learning_commit.py \
+  --trigger "Fix validator portability" \
+  --fix "Make validator path portable" \
+  --verify "python3 self-evolution/scripts/quick_validate_skill.py" \
+  --allow-commit \
+  --repo-root . \
+  --commit-message "fix: portable validator"
+```
+
+It also runs a basic **secrets scan** on staged content by default.
+
 ## License
 
 MIT
